@@ -1,7 +1,7 @@
 Wunderlist plugin for Kanboard
 ===================================
 
-- Allow to import a Wunderlist export file
+This plugin allow you to import a Wunderlist export file directly from the user interface of kanboard.
 
 Author
 ------
@@ -12,7 +12,7 @@ Author
 Installation
 ------------
 
-- Create a folder **plugins/Wunderlist**
+- Create the folder **plugins/Wunderlist**
 - Copy all files under this directory
 
 Documentation
