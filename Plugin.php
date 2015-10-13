@@ -7,6 +7,7 @@ use Core\Plugin\Base;
 
 class Plugin extends Base {
   public function initialize() {
+    $this->acl->extend('admin_acl', array('wunderlist' => '*'));
     
     $this->template->hook->attach('template:config:sidebar', 'wunderlist:config/sidebar');
     
@@ -28,7 +29,7 @@ class Plugin extends Base {
   }
   
   public function getPluginDescription() {
-    return t('Allow you to import Wunderlist tasks and lists');
+    return t('Allow you to import Wunderlist tasks and lists by uploading an export file');
   }
   
   public function getPluginHomepage() {
