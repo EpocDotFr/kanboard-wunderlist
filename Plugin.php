@@ -7,6 +7,9 @@ use Core\Plugin\Base;
 
 class Plugin extends Base {
   public function initialize() {
+    
+    $this->template->hook->attach('template:config:sidebar', 'wunderlist:config/sidebar');
+    
     $this->on('session.bootstrap', function($container) {
       Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
     });
