@@ -8,7 +8,6 @@ This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks a
   - Kanboard >= 1.0.19
 
 ## Installation
-------------
 
 - Create the folder **plugins/Wunderlist** in the installation directory of kanboard
 - Copy all files of this repository in this directory
