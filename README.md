@@ -1,21 +1,22 @@
 Wunderlist plugin for Kanboard
-===================================
+==============================
 
-This plugin allow you to import a Wunderlist export file directly from the user interface of kanboard.
+This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [kanboard](http://kanboard.net/) by uploading the Wunderlist export file (a JSON file).
 
-Author
-------
+## Prerequisites
 
-- Maxime
-- License MIT
+  - Kanboard >= 1.0.19
 
-Installation
+## Installation
 ------------
 
-- Create the folder **plugins/Wunderlist**
-- Copy all files under this directory
+- Create the folder **plugins/Wunderlist** in the installation directory of kanboard
+- Copy all files of this repository in this directory
 
-Documentation
--------------
+## Usage
 
-- [GitHub Wiki](https://github.com/EpocDotFr/kanboard-wunderlist/wiki)
+TODO
+
+## End words
+
+If you have questions or problems, you can [submit an issue](https://github.com/EpocDotFr/kanboard-wunderlist/issues).
