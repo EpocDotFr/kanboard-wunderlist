@@ -20,7 +20,7 @@ Go to the **Preferences** > **Import from Wunderlist** menu. Select a Wunderlist
 
 ## Gotchas
 
-  * Only users with administrator access can user this feature
+  * Only users with administrator access can use this feature
   * This plugin may be broken if you update kanboard (the plugin system is in its alpha stage, as mentioned [in this article](http://kanboard.net/news/version-1.0.19))
 
 ## End words
