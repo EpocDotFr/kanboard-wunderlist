@@ -5,7 +5,7 @@ This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks a
 
 ## Prerequisites
 
-  - Kanboard >= 1.0.19
+  - Kanboard 1.0.19
 
 ## Installation
 
