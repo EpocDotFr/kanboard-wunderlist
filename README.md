@@ -1,5 +1,4 @@
-Wunderlist plugin for Kanboard
-==============================
+# Wunderlist plugin for Kanboard
 
 This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [kanboard](http://kanboard.net/) by uploading an export file.
 
