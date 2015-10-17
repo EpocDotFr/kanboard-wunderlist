@@ -35,24 +35,27 @@ class Wunderlist extends Base {
       $form_name = 'wunderlist_file';
       
       try {
-        if (!isset($_FILES[$form_name]) or empty($_FILES[$form_name]['tmp_name'])) {
+        print_r($_FILES);
+        
+        if (!isset($_FILES[$form_name]) or empty($_FILES[$form_name]['name'])) {
           throw new \Exception(t('Please select a file'));
         }
+        
+        if (empty($_FILES[$form_name]['tmp_name'])) {
+          throw new \Exception(t('An error occured while uploading the file'));
+        }
+        
+        if ($_FILES[$form_name]['error'] == UPLOAD_ERR_OK and $_FILES[$form_name]['size'] > 0) {
+          $original_filename = $_FILES[$form_name]['name'];
+          $uploaded_filename = $_FILES[$form_name]['tmp_name'];
 
-        foreach ($_FILES[$form_name]['error'] as $key => $error) {
-          if ($error == UPLOAD_ERR_OK && $_FILES[$form_name]['size'][$key] > 0) {
-
-            $original_filename = $_FILES[$form_name]['name'][$key];
-            $uploaded_filename = $_FILES[$form_name]['tmp_name'][$key];
-
-            $this->objectStorage->moveUploadedFile($uploaded_filename, 'wunderlist-export.json');
-          }
+          $this->objectStorage->moveUploadedFile($uploaded_filename, 'tmp-wunderlist-export.json');
+        } else {
+          throw new \Exception(t('An error occured while uploading the file'));
         }
       } catch (\Exception $e) {
         $this->session->flashError($e->getMessage());
       }
-      
-      //$this->checkCSRFParam();
     }
     
     $this->response->html($this->layout('wunderlist:wunderlist/import', array(
