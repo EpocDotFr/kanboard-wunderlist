@@ -23,14 +23,8 @@ if (!function_exists('json_last_error_msg')) {
  * Wunderlist plugin controller
  */
 class Wunderlist extends Base {
-  /**
-   * Common layout for config views
-   *
-   * @access private
-   * @param  string    $template   Template name
-   * @param  array     $params     Template parameters
-   * @return string
-   */
+  const WUNDERLIST_EXPORT_FILE = 'wunderlist_file';
+  
   private function layout($template, array $params) {
     $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
     $params['values'] = $this->config->getAll();
@@ -40,8 +34,32 @@ class Wunderlist extends Base {
     return $this->template->layout('config/layout', $params);
   }
   
+  private function handleFile() {
+    $uploaded_filename = $_FILES[self::WUNDERLIST_EXPORT_FILE]['tmp_name'];
+
+    if ($this->objectStorage->moveUploadedFile($uploaded_filename, self::WUNDERLIST_EXPORT_FILE.'.json') !== false) {
+      $wunderlist_raw_data = $this->objectStorage->get(self::WUNDERLIST_EXPORT_FILE.'.json');
+      
+      if ($wunderlist_raw_data === false) {
+        throw new \Exception(t('Error reading the Wunderlist export file'));
+      }
+
+      $wunderlist_json_data = json_decode($wunderlist_raw_data);
+
+      if ($wunderlist_json_data == null) {
+        throw new \Exception(t('Error reading the JSON data from the Wunderlist export file').' : '.json_last_error_msg());
+      }
+
+      unset($wunderlist_raw_data);
+      
+      $this->doImport($wunderlist_json_data);
+    } else {
+      throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
+    }
+  }
+  
   private function doImport($json_data) {
-    
+    // TODO
   }
 
   /**
@@ -51,42 +69,22 @@ class Wunderlist extends Base {
    */
   public function import() {
     if ($this->request->isPost()) {
-      $form_name = 'wunderlist_file';
-      
       try {
-        if (!isset($_FILES[$form_name]) or empty($_FILES[$form_name]['name'])) {
+        if (!isset($_FILES[self::WUNDERLIST_EXPORT_FILE]) or empty($_FILES[self::WUNDERLIST_EXPORT_FILE]['name'])) {
           throw new \Exception(t('Please select a file'));
         }
         
-        if (empty($_FILES[$form_name]['tmp_name'])) {
+        if (empty($_FILES[self::WUNDERLIST_EXPORT_FILE]['tmp_name'])) {
           throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
         }
         
-        if ($_FILES[$form_name]['error'] == UPLOAD_ERR_OK and $_FILES[$form_name]['size'] > 0) {
-          $original_filename = $_FILES[$form_name]['name'];
-          $uploaded_filename = $_FILES[$form_name]['tmp_name'];
-
-          if ($this->objectStorage->moveUploadedFile($uploaded_filename, 'tmp-wunderlist-export.json') !== false) {
-            $wunderlist_raw_data = $this->objectStorage->get('tmp-wunderlist-export.json');
-            
-            if ($wunderlist_raw_data === false) {
-              throw new \Exception(t('Error reading the Wunderlist export file'));
-            }
-
-            $wunderlist_json_data = json_decode($wunderlist_raw_data);
-
-            if ($wunderlist_json_data == null) {
-              throw new \Exception(t('Error reading the JSON data from the Wunderlist export file'));
-            }
-
-            unset($wunderlist_raw_data);
-            
-            
-          }
+        if ($_FILES[self::WUNDERLIST_EXPORT_FILE]['error'] == UPLOAD_ERR_OK and $_FILES[self::WUNDERLIST_EXPORT_FILE]['size'] > 0) {
+          $this->handleFile();
         } else {
           throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
         }
       } catch (\Exception $e) {
+        ($this->objectStorage->remove(self::WUNDERLIST_EXPORT_FILE));
         $this->session->flashError($e->getMessage());
       }
     }
