@@ -1,8 +1,8 @@
 # Wunderlist plugin for Kanboard
 
-This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [kanboard](http://kanboard.net/) by uploading an export file.
+This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading an export file.
 
-![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg) ![kanboard version](https://img.shields.io/badge/kanboard-1.0.19-red.svg) ![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg) 
+![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg) ![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.19-red.svg) ![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg) 
 
 ## Prerequisites
 
@@ -21,11 +21,12 @@ Go to the **Preferences** > **Import from Wunderlist** menu. Select a Wunderlist
 
 ## Gotchas
 
-  * Only administrators can access this feature
   * This plugin may broke if you update Kanboard (the plugin system is in its alpha stage, as mentioned [in this article](http://kanboard.net/news/version-1.0.19))
+  * Only administrators can access this feature
+  * Existing tasks / projects are not checked yet (this means that duplicates may be created)
 
 ## End words
 
 If you have questions or problems, you can [submit an issue](https://github.com/EpocDotFr/kanboard-wunderlist/issues).
 
-You can even submit pull requests if you want. I want.
+You can even submit pull requests if you want. It's open-source man!

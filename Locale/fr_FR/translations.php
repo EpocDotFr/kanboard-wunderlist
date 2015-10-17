@@ -6,5 +6,7 @@ return array(
   'Import' => 'Importer',
   'Please choose the Wunderlist export file (usually wunderlist-*.json) :' => 'Veuillez choisir le fichier d\'export de Wunderlist (typiquement wunderlist-*.json) :',
   'Please select a file' => 'Veuillez sélectionner un fichier',
-  'An error occured while uploading the file' => 'Une erreur est survenue lors de l\'upload du fichier',
+  'An error occured while uploading the Wunderlist export file' => 'Une erreur est survenue lors de l\'upload du fichier d\'export de Wunderlist',
+  'Error reading the Wunderlist export file' => 'Erreur lors de la récupération du contenu du fichier d\'export Wunderlist',
+  'Error reading the JSON data from the Wunderlist export file' => 'Erreur lors de la lecture des données JSON du fichier d\'export Wunderlist',
 );
