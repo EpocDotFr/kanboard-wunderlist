@@ -1,4 +1,4 @@
-# Wunderlist plugin for Kanboard ![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.19-red.svg)
+# Wunderlist plugin for Kanboard
 
 This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading an export file.
 
@@ -6,7 +6,7 @@ This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks a
 
 ## Prerequisites
 
-The Kanboard version bellow is the exact version of Kanboard required to make this plugin work.
+![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.19-red.svg)
 
 ## Installation
 
