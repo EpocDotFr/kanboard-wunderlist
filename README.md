@@ -1,6 +1,6 @@
 # Wunderlist plugin for Kanboard
 
-This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading a Wunderlist export file.
+This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading a Wunderlist export file. It is the successor of [this script](https://github.com/EpocDotFr/WunderlistToKanboard).
 
 ![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg?link=https://github.com/EpocDotFr/kanboard-wunderlist&link=https://github.com/EpocDotFr/kanboard-wunderlist/releases) ![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg) 
 
@@ -17,7 +17,20 @@ You can check if the plugin is correctly installed in the **Preferences** > **Pl
 
 ## Usage
 
-Go to the **Preferences** > **Import from Wunderlist** menu. Select a Wunderlist export file (JSON format) to import. Click on the **Import** button.
+It is very simple.
+
+### Creating the Wunderlist export file
+
+  1. Go on the Wunderlist web app
+  2. Go in **Wunderlist settings** > **Account** tab
+  3. Click on the **Create backup** button
+  4. Download the file when it's done
+
+### Importing in Kanboard
+
+  1. Open Kanboard
+  2. Go to the **Preferences** > **Import from Wunderlist** menu
+  3. Select a Wunderlist export file (JSON format) to import, then click on the **Import** button
 
 ## How it works
 
