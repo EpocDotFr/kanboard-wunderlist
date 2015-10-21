@@ -2,11 +2,11 @@
 
 This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading a Wunderlist export file. It is the successor of [this script](https://github.com/EpocDotFr/WunderlistToKanboard).
 
-![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg?link=https://github.com/EpocDotFr/kanboard-wunderlist&link=https://github.com/EpocDotFr/kanboard-wunderlist/releases) ![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg) 
+[![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/releases) [![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/blob/master/LICENSE.md) 
 
 ## Prerequisites
 
-![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.19-red.svg?link=http://kanboard.net&link=http://kanboard.net/news/version-1.0.19)
+[![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.19-red.svg)](http://kanboard.net/news/version-1.0.19)
 
 ## Installation
 
