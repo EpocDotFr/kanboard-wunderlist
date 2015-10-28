@@ -1,8 +1,8 @@
 <?php
 
-namespace Plugin\Wunderlist\Controller;
+namespace Kanboard\Plugin\Wunderlist\Controller;
 
-use Controller\Base;
+use Kanboard\Controller\Base;
 
 if (!function_exists('json_last_error_msg')) {
   function json_last_error_msg() {
