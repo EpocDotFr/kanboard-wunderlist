@@ -25,7 +25,7 @@ class Plugin extends Base {
   }
   
   public function getPluginVersion() {
-    return 'master';
+    return '1.0-beta';
   }
   
   public function getPluginDescription() {
