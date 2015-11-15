@@ -2,7 +2,7 @@
     <h2><?= t('Import from Wunderlist') ?></h2>
 </div>
 
-<form action="<?= $this->url->href('wunderlist', 'import', array('plugin' => 'wunderlist')) ?>" method="post" enctype="multipart/form-data">
+<form action="<?= $this->url->href('wunderlist', 'import', array('plugin' => 'wunderlist')) ?>" method="post" enctype="multipart/form-data" class="listing">
   <?= $this->form->csrf() ?>
   <label><?= t('Please choose the Wunderlist export file (usually wunderlist-*.json) :') ?></label>
   <input type="file" name="wunderlist_file" accept="application/json" />

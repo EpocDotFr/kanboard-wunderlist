@@ -59,7 +59,76 @@ class Wunderlist extends Base {
   }
   
   private function doImport($json_data) {
-    // TODO
+    $projects = array();
+    $tasks = array();
+
+    $this->db->startTransaction();
+
+    // Lists
+    foreach ($json_data->data->lists as $list_to_import) {
+      $project_data = array(
+        'name' => $list_to_import->title,
+        'is_active' => 1,
+        'is_public' => $list_to_import->public ? 1 : 0
+      );
+
+      $project_id = $this->project->create($project_data, $this->userSession->getId(), true);
+      
+      if ($project_id > 0) {
+        $projects[$list_to_import->id] = $project_id;
+      } else {
+        $this->db->cancelTransaction();
+        throw new \Exception(t('An error occured while importing the project %s', $list_to_import->title));
+      }
+    }
+
+    // Tasks
+    foreach ($json_data->data->tasks as $task_to_import) {
+      $task_data = array(
+        'title' => $task_to_import->title,
+        'date_creation' => date_create($task_to_import->created_at)->getTimestamp(),
+        'date_modification' => date_create()->getTimestamp(),
+        'color_id' => $task_to_import->starred ? $this->color->find('red') : $this->color->getDefaultColor(),
+        'project_id' => $projects[$task_to_import->list_id],
+        'is_active' => $task_to_import->completed ? 0 : 1,
+        'date_completed' => $task_to_import->completed ? date_create($task_to_import->completed_at)->getTimestamp() : null,
+        'date_due' => isset($task_to_import->due_date) ? date_create($task_to_import->due_date)->getTimestamp() : null
+      );
+
+      // Description (note)
+      foreach ($json_data->data->notes as $note_to_import) {
+        if ($note_to_import->task_id == $task_to_import->id) {
+          $task_data['description'] = str_replace('\n', PHP_EOL, $note_to_import->content);
+
+          break;
+        }
+      }
+      
+      $task_id = $this->taskCreation->create($task_data);
+      
+      if ($task_id > 0) {
+        $tasks[$task_to_import->id] = $task_id;
+      } else {
+        $this->db->cancelTransaction();
+        throw new \Exception(t('An error occured while importing the task %s', $task_to_import->title));
+      }
+    }
+    
+    // Sub-tasks
+    foreach ($json_data->data->subtasks as $subtasks_to_import) {
+      $subtask_data = array(
+        'title' => $subtasks_to_import->title,
+        'status' => $subtasks_to_import->completed ? 2 : 0,
+        'task_id' => $tasks[$subtasks_to_import->task_id]
+      );
+      
+      if ($this->subtask->create($subtask_data) == 0) {
+        $this->db->cancelTransaction();
+        throw new \Exception(t('An error occured while importing the subtask %s', $subtasks_to_import->title));
+      }
+    }
+
+    $this->db->closeTransaction();
   }
 
   /**
@@ -83,6 +152,8 @@ class Wunderlist extends Base {
         } else {
           throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
         }
+
+        $this->session->flash(t('Wunderlist file imported successfuly'));
       } catch (\Exception $e) {
         $this->objectStorage->remove(self::WUNDERLIST_EXPORT_FILE);
         $this->session->flashError($e->getMessage());

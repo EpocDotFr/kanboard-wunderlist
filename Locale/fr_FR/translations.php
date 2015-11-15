@@ -9,4 +9,8 @@ return array(
   'An error occured while uploading the Wunderlist export file' => 'Une erreur est survenue lors de l\'upload du fichier d\'export de Wunderlist',
   'Error reading the Wunderlist export file' => 'Erreur lors de la récupération du contenu du fichier d\'export Wunderlist',
   'Error reading the JSON data from the Wunderlist export file' => 'Erreur lors de la lecture des données JSON du fichier d\'export Wunderlist',
+  'Wunderlist file imported successfuly' => 'Fichier d\'export Wunderlist importé avec succès',
+  'An error occured while importing the project %s' => 'Une erreur est survenue lors de l\'importation du projet %s',
+  'An error occured while importing the task %s' => 'Une erreur est survenue lors de l\'importation de la tâche %s',
+  'An error occured while importing the subtask %s' => 'Une erreur est survenue lors de l\'importation de la sous-tâche %s',
 );

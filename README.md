@@ -42,7 +42,7 @@ Kanboard and Wunderlist are very different, so there's some things to know about
   * Public lists are imported as public projects (same for private ones)
   * Starred tasks will have a color of red, otherwise yellow
   * Notes are imported as task description
-  * Tasks are created in the default column of each projects
+  * Tasks are created in the default column / swimlane of each projects
 
 All the other data supported by Kanboard is imported with no problems.
 
@@ -51,6 +51,7 @@ All the other data supported by Kanboard is imported with no problems.
   * This plugin may broke if you update Kanboard (the plugin system is in its alpha stage, as mentioned in [this article](http://kanboard.net/news/version-1.0.19))
   * Only administrators can access this feature
   * Existing tasks / projects are not checked yet (this means that duplicates may be created)
+  * Hooks **are** fired for each tasks created (and also all other relevant hooks)
   * The following things **cannot** be imported (they are not present in the Wunderlist export file):
     * Users (and of course: users assigned to tasks)
     * Attached files
