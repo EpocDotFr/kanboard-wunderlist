@@ -69,7 +69,7 @@ class Wunderlist extends Base {
       $project_data = array(
         'name' => $list_to_import->title,
         'is_active' => 1,
-        'is_public' => $list_to_import->public ? 1 : 0
+        'is_public' => $list_to_import->public ? 1 : 0 // Public access
       );
 
       $project_id = $this->project->create($project_data, $this->userSession->getId(), true);

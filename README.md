@@ -39,7 +39,7 @@ Kanboard and Wunderlist are very different, so there's some things to know about
   * Lists and folders are imported as projects
   * The default Kanboard's columns are created for each imported projects (according to your Kanboard configuration)
   * If a task is tagged as completed on Wunderlist, it will be tagged as closed on Kanboard
-  * Public lists are imported as public projects (same for private ones)
+  * Public lists are imported with public access active (otherwise no)
   * Starred tasks will have a color of red, otherwise yellow
   * Notes are imported as task description
   * Tasks are created in the default column / swimlane of each projects
@@ -56,6 +56,10 @@ All the other data supported by Kanboard is imported with no problems.
     * Users (and of course: users assigned to tasks)
     * Attached files
     * Comments
+
+## Changelog
+
+See [here](https://github.com/EpocDotFr/kanboard-wunderlist/releases).
 
 ## End words
 
