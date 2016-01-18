@@ -6,7 +6,7 @@ This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks a
 
 ## Prerequisites
 
-[![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.20-red.svg)](http://kanboard.net/news/version-1.0.20)
+[![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.23-red.svg)](http://kanboard.net/news/version-1.0.23)
 
 ## Installation
 

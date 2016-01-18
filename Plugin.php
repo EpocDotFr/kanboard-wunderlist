@@ -4,14 +4,15 @@ namespace Kanboard\Plugin\Wunderlist;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Plugin\Base;
+use Kanboard\Core\Security\Role;
 
 class Plugin extends Base {
   public function initialize() {
-    $this->acl->extend('admin_acl', array('wunderlist' => '*'));
+    $this->applicationAccessMap->add('Wunderlist', '*', Role::APP_ADMIN);
     
     $this->template->hook->attach('template:config:sidebar', 'wunderlist:config/sidebar');
     
-    $this->on('session.bootstrap', function($container) {
+    $this->on('app.bootstrap', function($container) {
       Translator::load($container['config']->getCurrentLanguage(), __DIR__.'/Locale');
     });
   }
@@ -25,7 +26,7 @@ class Plugin extends Base {
   }
   
   public function getPluginVersion() {
-    return '1.0';
+    return '1.0.1';
   }
   
   public function getPluginDescription() {
