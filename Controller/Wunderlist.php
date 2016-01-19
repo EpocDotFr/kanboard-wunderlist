@@ -153,10 +153,10 @@ class Wunderlist extends Base {
           throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
         }
 
-        $this->session->flash(t('Wunderlist file imported successfuly'));
+        $this->flash->success(t('Wunderlist file imported successfuly'));
       } catch (\Exception $e) {
         $this->objectStorage->remove(self::WUNDERLIST_EXPORT_FILE);
-        $this->session->flashError($e->getMessage());
+        $this->flash->failure($e->getMessage());
       }
     }
     
