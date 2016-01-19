@@ -26,7 +26,7 @@ class Wunderlist extends Base {
   const WUNDERLIST_EXPORT_FILE = 'wunderlist_file';
   
   private function layout($template, array $params) {
-    $params['board_selector'] = $this->projectPermission->getAllowedProjects($this->userSession->getId());
+    $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
     $params['values'] = $this->config->getAll();
     $params['errors'] = array();
     $params['config_content_for_layout'] = $this->template->render($template, $params);
