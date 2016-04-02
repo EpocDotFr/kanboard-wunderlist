@@ -61,6 +61,12 @@ All the other data supported by Kanboard is imported with no problems.
 
 See [here](https://github.com/EpocDotFr/kanboard-wunderlist/releases).
 
+## Contributors
+
+Thanks to:
+
+  - [@85pando](https://github.com/85pando)
+
 ## End words
 
 If you have questions or problems, you can [submit an issue](https://github.com/EpocDotFr/kanboard-wunderlist/issues).
