@@ -25,15 +25,6 @@ if (!function_exists('json_last_error_msg')) {
 class Wunderlist extends Base {
   const WUNDERLIST_EXPORT_FILE = 'wunderlist_file';
   
-  private function layout($template, array $params) {
-    $params['board_selector'] = $this->projectUserRole->getActiveProjectsByUser($this->userSession->getId());
-    $params['values'] = $this->config->getAll();
-    $params['errors'] = array();
-    $params['config_content_for_layout'] = $this->template->render($template, $params);
-
-    return $this->template->layout('config/layout', $params);
-  }
-  
   private function handleFile() {
     $uploaded_filename = $_FILES[self::WUNDERLIST_EXPORT_FILE]['tmp_name'];
 
@@ -160,7 +151,7 @@ class Wunderlist extends Base {
       }
     }
     
-    $this->response->html($this->layout('wunderlist:wunderlist/import', array(
+    $this->response->html($this->helper->layout->config('wunderlist:wunderlist/import', array(
       'title' => t('Settings').' &gt; '.t('Import from Wunderlist'),
       'max_size' => ini_get('upload_max_filesize')
     )));
