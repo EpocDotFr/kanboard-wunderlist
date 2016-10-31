@@ -2,7 +2,7 @@
 
 namespace Kanboard\Plugin\Wunderlist\Controller;
 
-use Kanboard\Controller\Base;
+use Kanboard\Controller\BaseController;
 
 if (!function_exists('json_last_error_msg')) {
   function json_last_error_msg() {
@@ -22,7 +22,7 @@ if (!function_exists('json_last_error_msg')) {
 /**
  * Wunderlist plugin controller
  */
-class Wunderlist extends Base {
+class Wunderlist extends BaseController {
   const WUNDERLIST_EXPORT_FILE = 'wunderlist_file';
   
   private function handleFile() {
