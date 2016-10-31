@@ -63,7 +63,7 @@ class Wunderlist extends BaseController {
         'is_public' => $list_to_import->public ? 1 : 0 // Public access
       );
 
-      $project_id = $this->project->create($project_data, $this->userSession->getId(), true);
+      $project_id = $this->projectModel->create($project_data, $this->userSession->getId(), true);
       
       if ($project_id > 0) {
         $projects[$list_to_import->id] = $project_id;
@@ -79,7 +79,7 @@ class Wunderlist extends BaseController {
         'title' => $task_to_import->title,
         'date_creation' => date_create($task_to_import->created_at)->getTimestamp(),
         'date_modification' => date_create()->getTimestamp(),
-        'color_id' => $task_to_import->starred ? $this->color->find('red') : $this->color->getDefaultColor(),
+        'color_id' => $task_to_import->starred ? $this->colorModel->find('red') : $this->colorModel->getDefaultColor(),
         'project_id' => $projects[$task_to_import->list_id],
         'is_active' => $task_to_import->completed ? 0 : 1,
         'date_completed' => $task_to_import->completed ? date_create($task_to_import->completed_at)->getTimestamp() : null,
@@ -95,7 +95,7 @@ class Wunderlist extends BaseController {
         }
       }
       
-      $task_id = $this->taskCreation->create($task_data);
+      $task_id = $this->taskCreationModel->create($task_data);
       
       if ($task_id > 0) {
         $tasks[$task_to_import->id] = $task_id;
@@ -113,7 +113,7 @@ class Wunderlist extends BaseController {
         'task_id' => $tasks[$subtasks_to_import->task_id]
       );
       
-      if ($this->subtask->create($subtask_data) == 0) {
+      if ($this->subtaskModel->create($subtask_data) == 0) {
         $this->db->cancelTransaction();
         throw new \Exception(t('An error occured while importing the subtask %s', $subtasks_to_import->title));
       }
