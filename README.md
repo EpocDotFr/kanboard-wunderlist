@@ -2,16 +2,29 @@
 
 This plugin allow you to import [Wunderlist](http://www.wunderlist.com/) tasks and lists directly from the user interface of [Kanboard](http://kanboard.net/) by uploading a Wunderlist export file. It is the successor of [this script](https://github.com/EpocDotFr/WunderlistToKanboard).
 
-[![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/releases) [![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/blob/master/LICENSE.md) 
+> **Don't forget that Microsoft, which acquired Wunderlist back in 2015, will shut down Wunderlist at an unkown date.
+> Migrate your tasks as soon as possible.**
+> More information: https://techcrunch.com/2017/04/19/microsoft-to-shut-down-wunderlist-in-favor-of-its-new-app-to-do/
+
+[![Latest release](https://img.shields.io/github/release/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/releases) [![License](https://img.shields.io/github/license/EpocDotFr/kanboard-wunderlist.svg)](https://github.com/EpocDotFr/kanboard-wunderlist/blob/master/LICENSE.md)
 
 ## Prerequisites
 
-[![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.34-red.svg)](http://kanboard.net/news/version-1.0.34)
+[![Kanboard version](https://img.shields.io/badge/Kanboard-1.0.48-red.svg)](https://kanboard.net/news/version-1.0.48)
 
 ## Installation
 
-- Create the folder `plugins/Wunderlist` in the installation directory of Kanboard
-- Copy all the files from this repository in this directory
+**Manually, latest release:**
+
+  1. Navigate to the `plugins` directory, located in the root installation directory of Kanboard
+  2. Create the `Wunderlist` folder
+  3. Download the latest release [here](https://github.com/EpocDotFr/kanboard-wunderlist/releases)
+  4. Extract all files in the directory contained in the archive file you downloaded in the `Wunderlist` directory created previously
+
+**Using the Git CLI, bleeding-edge code:**
+
+  1. Navigate to the `plugins` directory, located in the root installation directory of Kanboard
+  2. `git clone https://github.com/EpocDotFr/kanboard-wunderlist.git Wunderlist`
 
 You can check if the plugin is correctly installed in the **Preferences** > **Plugins** menu.
 
@@ -22,8 +35,8 @@ It is very simple.
 ### Creating the Wunderlist export file
 
   1. Go on the Wunderlist web app
-  2. Go in **Wunderlist settings** > **Account** tab
-  3. Click on the **Create backup** button
+  2. Go in **Menu** > **Account Settings** tab
+  3. Click on the **Create Backup** button
   4. Download the file when it's done
 
 ### Importing in Kanboard
@@ -48,11 +61,11 @@ All the other data supported by Kanboard is imported with no problems.
 
 ## Gotchas
 
-  * This plugin may broke if you update Kanboard (the plugin system is in its alpha stage, as mentioned in [this article](http://kanboard.net/news/version-1.0.19))
+  * This plugin may broke if you update Kanboard. If so, please [submit an issue](https://github.com/EpocDotFr/kanboard-wunderlist/issues)
   * Only administrators can access this feature
-  * Existing tasks / projects are not checked yet (this means that duplicates may be created)
+  * Duplicates are **not** checked
   * Hooks **are** fired for each tasks created (and also all other relevant hooks)
-  * The following things **cannot** be imported (they are not present in the Wunderlist export file):
+  * The following things **cannot** be imported (they aren't available in the Wunderlist export file):
     * Users (and of course: users assigned to tasks)
     * Attached files
     * Comments

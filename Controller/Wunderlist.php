@@ -24,13 +24,13 @@ if (!function_exists('json_last_error_msg')) {
  */
 class Wunderlist extends BaseController {
   const WUNDERLIST_EXPORT_FILE = 'wunderlist_file';
-  
+
   private function handleFile() {
     $uploaded_filename = $_FILES[self::WUNDERLIST_EXPORT_FILE]['tmp_name'];
 
     if ($this->objectStorage->moveUploadedFile($uploaded_filename, self::WUNDERLIST_EXPORT_FILE.'.json') !== false) {
       $wunderlist_raw_data = $this->objectStorage->get(self::WUNDERLIST_EXPORT_FILE.'.json');
-      
+
       if ($wunderlist_raw_data === false) {
         throw new \Exception(t('Error reading the Wunderlist export file'));
       }
@@ -42,13 +42,13 @@ class Wunderlist extends BaseController {
       }
 
       unset($wunderlist_raw_data);
-      
+
       $this->doImport($wunderlist_json_data);
     } else {
       throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
     }
   }
-  
+
   private function doImport($json_data) {
     $projects = array();
     $tasks = array();
@@ -64,7 +64,7 @@ class Wunderlist extends BaseController {
       );
 
       $project_id = $this->projectModel->create($project_data, $this->userSession->getId(), true);
-      
+
       if ($project_id > 0) {
         $projects[$list_to_import->id] = $project_id;
       } else {
@@ -74,12 +74,15 @@ class Wunderlist extends BaseController {
     }
 
     // Tasks
+    $red = $this->colorModel->find('red');
+    $defaultColor = $this->colorModel->getDefaultColor();
+
     foreach ($json_data->data->tasks as $task_to_import) {
       $task_data = array(
         'title' => $task_to_import->title,
         'date_creation' => date_create($task_to_import->created_at)->getTimestamp(),
         'date_modification' => date_create()->getTimestamp(),
-        'color_id' => $task_to_import->starred ? $this->colorModel->find('red') : $this->colorModel->getDefaultColor(),
+        'color_id' => $task_to_import->starred ? $red : $defaultColor,
         'project_id' => $projects[$task_to_import->list_id],
         'is_active' => $task_to_import->completed ? 0 : 1,
         'date_completed' => $task_to_import->completed ? date_create($task_to_import->completed_at)->getTimestamp() : null,
@@ -94,9 +97,9 @@ class Wunderlist extends BaseController {
           break;
         }
       }
-      
+
       $task_id = $this->taskCreationModel->create($task_data);
-      
+
       if ($task_id > 0) {
         $tasks[$task_to_import->id] = $task_id;
       } else {
@@ -104,7 +107,7 @@ class Wunderlist extends BaseController {
         throw new \Exception(t('An error occured while importing the task %s', $task_to_import->title));
       }
     }
-    
+
     // Sub-tasks
     foreach ($json_data->data->subtasks as $subtasks_to_import) {
       $subtask_data = array(
@@ -112,7 +115,7 @@ class Wunderlist extends BaseController {
         'status' => $subtasks_to_import->completed ? 2 : 0,
         'task_id' => $tasks[$subtasks_to_import->task_id]
       );
-      
+
       if ($this->subtaskModel->create($subtask_data) == 0) {
         $this->db->cancelTransaction();
         throw new \Exception(t('An error occured while importing the subtask %s', $subtasks_to_import->title));
@@ -133,11 +136,11 @@ class Wunderlist extends BaseController {
         if (!isset($_FILES[self::WUNDERLIST_EXPORT_FILE]) or empty($_FILES[self::WUNDERLIST_EXPORT_FILE]['name'])) {
           throw new \Exception(t('Please select a file'));
         }
-        
+
         if (empty($_FILES[self::WUNDERLIST_EXPORT_FILE]['tmp_name'])) {
           throw new \Exception(t('An error occured while uploading the Wunderlist export file'));
         }
-        
+
         if ($_FILES[self::WUNDERLIST_EXPORT_FILE]['error'] == UPLOAD_ERR_OK and $_FILES[self::WUNDERLIST_EXPORT_FILE]['size'] > 0) {
           $this->handleFile();
         } else {
@@ -150,7 +153,7 @@ class Wunderlist extends BaseController {
         $this->flash->failure($e->getMessage());
       }
     }
-    
+
     $this->response->html($this->helper->layout->config('wunderlist:wunderlist/import', array(
       'title' => t('Settings').' &gt; '.t('Import from Wunderlist'),
       'max_size' => ini_get('upload_max_filesize')
