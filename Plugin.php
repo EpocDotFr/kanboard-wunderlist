@@ -38,6 +38,6 @@ class Plugin extends Base {
   }
 
   public function getCompatibleVersion() {
-    return '1.0.48';
+    return '>=1.0.48';
   }
 }
