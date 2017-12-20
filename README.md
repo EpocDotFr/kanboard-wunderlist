@@ -80,6 +80,7 @@ Thanks to:
 
   - [@85pando](https://github.com/85pando)
   - [@dmkcv](https://github.com/dmkcv)
+  - [@CMiksche](https://github.com/CMiksche)
 
 ## End words
 
