@@ -34,16 +34,16 @@ It is very simple.
 
 ### Creating the Wunderlist export file
 
-  1. Go on the Wunderlist web app
-  2. Go in **Menu** > **Account Settings** tab
-  3. Click on the **Create Backup** button
-  4. Download the file when it's done
+  1. Go on the export.wunderlist.com web app
+  2. Autherise and click **Export**
+  3. Keep checking your emails for the ready notification
+  4. Download the file from emailed link when it's done
 
 ### Importing in Kanboard
 
   1. Open Kanboard
   2. Go to the **Preferences** > **Import from Wunderlist** menu
-  3. Select a Wunderlist export file (JSON format) to import, then click on the **Import** button
+  3. Select a Wunderlist export file (ZIP format) to import, then click on the **Import** button
 
 ## How it works
 
@@ -56,6 +56,7 @@ Kanboard and Wunderlist are very different, so there's some things to know about
   * Starred tasks will have a color of red, otherwise yellow
   * Notes are imported as task description
   * Tasks are created in the default column / swimlane of each projects
+  * Comments will append the (**username**) originally commented
 
 All the other data supported by Kanboard is imported with no problems.
 
@@ -63,12 +64,13 @@ All the other data supported by Kanboard is imported with no problems.
 
   * This plugin may broke if you update Kanboard. If so, please [submit an issue](https://github.com/EpocDotFr/kanboard-wunderlist/issues)
   * Only administrators can access this feature
+  * Imported lists will be projects with name appened: "Imported"
   * Duplicates are **not** checked
   * Hooks **are** fired for each tasks created (and also all other relevant hooks)
   * The following things **cannot** be imported (they aren't available in the Wunderlist export file):
-    * Users (and of course: users assigned to tasks)
-    * Attached files
-    * Comments
+  * Users (and of course: users assigned to tasks)
+  * Rare images will fail to import (Tiff)
+  * Timestamps are not imported, all imported tasks will have time of import as the **modified** time
 
 ## Changelog
 
